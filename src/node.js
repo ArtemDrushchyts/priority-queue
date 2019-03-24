@@ -47,14 +47,42 @@ class Node {
 			if(this.right) {
 				this.right.parent = this.parent; 
 			}
-		}
-		if(this.parent.parent) {
-			if(this.parent === this.parent.parent) {
-				this.parent.parent.left = this;
+			if(this.parent.left === this) {
+				if (this.parent.right) {
+					this.parent.right.parent = this;
+				}
+				parm = this.left;
+				this.left = this.parent;
+				this.parent.left = parm;
+
+				parm = this.right;
+				this.right = this.parent.right;
+				this.parent.right = parm;
+			} else {
+				if(this.parent.left) {
+					this.parent.left.parent = this;
+				}
+				parm = this.left;
+				this.left = this.parent.left;
+				this.parent.left = parm;
+		  
+				parm = this.right;
+				this.right = this.parent;
+				this.parent.right = parm;
 			}
-			else {
-				this.parent.parent.right = this;
+
+
+			if(this.parent.parent) {
+				if(this.parent === this.parent.parent.left) {
+					this.parent.parent.left = this;
+				}
+				else {
+					this.parent.parent.right = this;
+				}
 			}
+			parm = this.parent.parent;
+			this.parent.parent = this;
+			this.parent = parm;
 		}
 	}
 }

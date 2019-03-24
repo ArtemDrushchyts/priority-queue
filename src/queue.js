@@ -29,7 +29,12 @@ class PriorityQueue {
 	}
 
 	isEmpty() {
-		return this.heap.isEmpty();
+		if (this.heap.isEmpty()) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 }
 
